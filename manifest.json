@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Dominion Blocker",
+  "version": "1.0",
+  "description": "Counts the number of times a certain button is clicked on a page",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://dominion.games/"],
+      "js": ["content.js"]
+    }
+  ]
+}
