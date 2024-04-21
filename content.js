@@ -14,10 +14,14 @@ function updateButtons() {
         for (let node of addedNodes) {
           if (node.nodeType === Node.ELEMENT_NODE) {
             const buttons = node.querySelectorAll('.automatch-button');
+            console.log("Found Button")
             for (let button of buttons) {
               if (hitGameLimit()) {
-                button.innerText = 'Game Limit Reached';
-                button.disabled = true;
+                button.remove()
+              }
+              else {
+                let games = checkGames()
+                button.innerText = `Play Game(${games}/${GAME_LIMIT})`;
               }
             }
           }
