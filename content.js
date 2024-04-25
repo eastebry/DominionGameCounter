@@ -14,7 +14,6 @@ function updateButtons() {
         for (let node of addedNodes) {
           if (node.nodeType === Node.ELEMENT_NODE) {
             const buttons = node.querySelectorAll('.automatch-button');
-            console.log("Found Button")
             for (let button of buttons) {
               if (hitGameLimit()) {
                 button.remove()
@@ -36,7 +35,6 @@ function updateButtons() {
 function hitGameLimit() {
   // load game history from local storage
   let gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
-  console.log(gameHistory);
   // count the number of timestamps in the game history that represent times within the last day
   const now = Date.now();
   let count = 0;
@@ -53,8 +51,13 @@ function countGame() {
   // load game history from local storage
   let gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
 
+// Get today's date at 12:00:00 AM, converted to a unix timestamp
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayTimestamp = today.getTime();
+
   // add current timestamp to game history
-  gameHistory.push(Date.now());
+  gameHistory.push(todayTimestamp);
 
   // remove elements from front of game history until it is no longer than GAME_LIMIT
   while (gameHistory.length > GAME_LIMIT) {
